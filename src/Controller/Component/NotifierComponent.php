@@ -18,6 +18,7 @@ use Bakkerij\Notifier\Utility\NotificationManager;
 use Cake\Controller\Component;
 use Cake\Core\Configure;
 use Cake\ORM\TableRegistry;
+use Symfony\Component\Console\Helper\Table;
 
 /**
  * Notifier component
@@ -97,7 +98,7 @@ class NotifierComponent extends Component
             $userId = $this->Controller->Auth->user('id');
         }
 
-        $model = TableRegistry::get('Bakkerij/Notifier.Notifications');
+        $model = TableRegistry::getTableLocator()->get('Bakkerij/Notifier.Notifications');
 
         $query = $model->find()->where(['Notifications.user_id' => $userId])->order(['created' => 'desc']);
 
@@ -139,7 +140,7 @@ class NotifierComponent extends Component
             $userId = $this->Controller->Auth->user('id');
         }
 
-        $model = TableRegistry::get('Bakkerij/Notifier.Notifications');
+        $model = TableRegistry::getTableLocator()->get('Bakkerij/Notifier.Notifications');
 
         $query = $model->find()->where(['Notifications.user_id' => $userId]);
 
@@ -166,7 +167,7 @@ class NotifierComponent extends Component
             $user = $this->Controller->Auth->user('id');
         }
 
-        $model = TableRegistry::get('Bakkerij/Notifier.Notifications');
+        $model = TableRegistry::getTableLocator()->get('Bakkerij/Notifier.Notifications');
 
 
         if (!$notificationId) {

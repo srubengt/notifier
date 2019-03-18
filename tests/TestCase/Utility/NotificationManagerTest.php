@@ -31,7 +31,7 @@ class NotificationManagerTest extends TestCase
         parent::setUp();
         $this->Manager = NotificationManager::instance();
 
-        $this->Model = TableRegistry::get('Bakkerij/Notifier.Notifications');
+        $this->Model = TableRegistry::getTableLocator()->get('Bakkerij/Notifier.Notifications');
     }
 
     public function tearDown()

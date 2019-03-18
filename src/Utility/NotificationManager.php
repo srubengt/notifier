@@ -75,7 +75,7 @@ class NotificationManager
      */
     public function notify($data)
     {
-        $model = TableRegistry::get('Bakkerij/Notifier.Notifications');
+        $model = TableRegistry::getTableLocator()->get('Bakkerij/Notifier.Notifications');
 
         $_data = [
             'users' => [],

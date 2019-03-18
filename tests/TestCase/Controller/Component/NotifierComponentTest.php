@@ -37,7 +37,7 @@ class NotifierComponentTest extends TestCase
         parent::setUp();
 
         $this->Manager = NotificationManager::instance();
-        $this->Model = TableRegistry::get('Bakkerij/Notifier.Notifications');
+        $this->Model = TableRegistry::getTableLocator()->get('Bakkerij/Notifier.Notifications');
 
         // Setup our component and fake the controller
         $request = new Request();

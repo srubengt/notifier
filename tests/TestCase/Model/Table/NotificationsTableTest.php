@@ -31,7 +31,7 @@ class NotificationsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->Notifications = TableRegistry::get('Bakkerij/Notifier.Notifications');
+        $this->Notifications = TableRegistry::getTableLocator()->get('Bakkerij/Notifier.Notifications');
     }
 
     public function tearDown()
