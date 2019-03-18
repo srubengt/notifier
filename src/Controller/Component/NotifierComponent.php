@@ -168,6 +168,7 @@ class NotifierComponent extends Component
 
         $model = TableRegistry::get('Bakkerij/Notifier.Notifications');
 
+
         if (!$notificationId) {
             $query = $model->find('all')->where([
                 'user_id' => $user,
