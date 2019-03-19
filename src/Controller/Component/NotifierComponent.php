@@ -110,6 +110,50 @@ class NotifierComponent extends Component
     }
 
     /**
+     * getNotification
+     *
+     * Returns one notification.
+     *
+     * ### Examples
+     * ```
+     *  // if the user is logged in, this is the way to get all notifications
+     *  $this->Notifier->getNotifications();
+     *
+     *  // for a specific user, use the first parameter for the user_id
+     *  $this->Notifier->getNotifications(1);
+     *
+     *  // default all notifications are returned. Use the second parameter to define read / unread:
+     *
+     *  // get all unread notifications
+     *  $this->Notifier->getNotifications(1, true);
+     *
+     *  // get all read notifications
+     *  $this->Notifier->getNotifications(1, false);
+     * ```
+     * @param int|null $userId Id of the user.
+     * @param bool|null $state The state of notifications: `true` for unread, `false` for read, `null` for all.
+     * @return array
+     */
+    public function getNotification($id = null, $userId = null)
+    {
+        if (!$userId) {
+            $userId = $this->Controller->Auth->user('id');
+        }
+
+        $model = TableRegistry::getTableLocator()->get('Bakkerij/Notifier.Notifications');
+
+        $query = $model->find()
+            ->where(
+                [
+                    'Notifications.user_id' => $userId,
+                    'Notifications.id' => $id
+                ]
+            );
+
+        return $query->toArray();
+    }
+
+    /**
      * countNotifications
      *
      * Returns a number of notifications.
@@ -179,7 +223,6 @@ class NotifierComponent extends Component
             $query = $model->find('all')->where([
                 'user_id' => $user,
                 'id' => $notificationId
-
             ]);
         }
 
@@ -188,6 +231,9 @@ class NotifierComponent extends Component
             $model->save($item);
         }
     }
+
+
+
 
     /**
      * notify
