@@ -112,28 +112,20 @@ class NotifierComponent extends Component
     /**
      * getNotification
      *
-     * Returns one notification.
+     * Returns a single notification by id and user_id [optional].
      *
      * ### Examples
      * ```
-     *  // if the user is logged in, this is the way to get all notifications
-     *  $this->Notifier->getNotifications();
+     *
      *
      *  // for a specific user, use the first parameter for the user_id
-     *  $this->Notifier->getNotifications(1);
+     *  $this->Notifier->getNotification(1);
      *
-     *  // default all notifications are returned. Use the second parameter to define read / unread:
-     *
-     *  // get all unread notifications
-     *  $this->Notifier->getNotifications(1, true);
-     *
-     *  // get all read notifications
-     *  $this->Notifier->getNotifications(1, false);
-     * ```
-     * @param int|null $userId Id of the user.
-     * @param bool|null $state The state of notifications: `true` for unread, `false` for read, `null` for all.
-     * @return array
+     * @param int|null $id Id of the notification.
+     * @param int|null $userId Id of the user, if null then get Auth->user('id')
+     * @return object
      */
+
     public function getNotification($id = null, $userId = null)
     {
         if (!$userId) {
@@ -150,8 +142,9 @@ class NotifierComponent extends Component
                 ]
             );
 
-        return $query->toArray();
+        return $query->toArray()[0];
     }
+
 
     /**
      * countNotifications
